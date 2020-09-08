@@ -110,43 +110,47 @@ namespace lessons
         {
             int count = 0;
 
+            int x=0;
+
             for (int i = 0; i < myArray.Length; i++)
             {
-                if(myArray[i]==element)         
-                    count++;              
-            }
-
-            int[] newArray = new int[myArray.Length - count];
-
-            count = 0;
-
-            for (int i = 0; i < newArray.Length; i++)
-            {
-                if(myArray[i] == element )
+                if (myArray[i] == element)
                 {
-                    count ++;
-                    if (i + count < myArray.Length)
-                        newArray[i] = myArray[i + count];
-                    else
-                        count--;
-                        newArray[i] = myArray[i + count];
-                }
-                else if(myArray[i + count] == element)
-                {
+                    x = i;
                     count++;
-                    newArray[i] = myArray[i + count];
-                }
-                else
-                {
-                    newArray[i]=myArray[i+count];
+                    break;
                 }
                     
-
-                
+               
             }
+            if (count == 0)
+                return;
+            int[] newArray = new int[myArray.Length -1];
+            if(x==0)
+            {
+                for (int i = 0; i < newArray.Length; i++)
+                {
+                newArray[i] = myArray[i+1];
+                }
 
+            }
+            else
+            {
+                for (int i = 0; i < x; i++)
+                {
+                    newArray[i] = myArray[i];
+                }
+
+                for (int i = x+1; i < myArray.Length; i++)
+                {
+                    newArray[i-1] = myArray[i];
+                }
+
+
+
+            }
             myArray = newArray;
-
+            Resize3(ref myArray, element);
         }
     }
 
